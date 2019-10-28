@@ -1,21 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<HTML LANG="en">
 <head>
-    <meta charset="UTF-8">
+    <meta char-set="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src= "scripts/main.js"></script>
+    
     <title>Popcorn Sales</title>
+
 </head>
 <body>
     <h1>Club Popcorn Sales</h1>
-    <form name="contactme"  action="mailto:mailto:ilovekpop2016@outlook.com"   method="POST" onsubmit="return validate()">
-        Name:<br>
-        <input type="text" name="name" >
+    <form id= "myForm" name="contactme"  action= "message.html"   method="POST" onSubmit="return validateTextBox();">
+        <label for= "name"> Name: </label>
+        <input type="text" name="name" placeholder= "Name Required">
         <br>
         Street Address:<br>
         <input type="address" name="address" style="width: 500px">
         <br>
-        City,State,Zip: <br>
+        City, State, Zip: <br>
         <input type="city" name="city" style="width: 500px" >
         <br>
 
@@ -31,33 +34,33 @@
             <tr>
                 <th>Unpopped Popcorn(1 lb.)</th>
                 <th>$3.00</th>
-                <th><input type="checkbox" name="unpopped" id="unpopped"> </th>
+                <th><input type="input" onclick= "getSum()" name="product" id="unpopped"> </th>
             </tr>
             <tr>
                 <th>Caramel Popcorn(2 lb. Canister)</th>
                 <th>$3.50</th>
-                <th><input type="checkbox" name="caramel" id="caramel"> </th>
+                <th><input type="input" onclick= "getSum()" name="product" id="caramel"> </th>
             </tr>
             <tr>
                 <th>Caramel Nut Popcorn(2 lb. Canister)</th>
                 <th>$4.50</th>
-                <th><input type="checkbox" name="nut" id="nut"> </th>
+                <th><input type="input" onclick= "getSum()" name="product" id="nut"> </th>
             </tr>
             <tr>
                 <th>Toffey Nut Popcorn(2 lb. Canister)</th>
                 <th>$5.00</th>
-                <th><input type="checkbox" name="toffey" id="toffey"> </th>
+                <th><input type="input" onclick= "getSum()" name="product" id="toffey"> </th>
             </tr>
             <tr>
                 <th><strong>Subtotal:</strong></th>
-                <th><input type="total" style="width: 30px"></th>
-                <th><input type="button" name="update" id="update total" value="Update Total"> </th>
+                <th><input type="total" name= "total"readonly= "readonly" style="width: 30px"></th>
+                <th><input type="button" name="update" id="update_total" onclick= "subTotall()" value="Update Total"> </th>
             </tr>
         </table>
 <br>
         <strong><h1>Payment Method</h1></strong>
         <strong>Grand Total</strong>:
-        <input type="text" name="total" id="total" style="width: 100px">
+        <input type="text" name="Gtotal" style="width: 100px">
         <br>
         <table cellspacing="15">
             <tr>
@@ -69,11 +72,47 @@
             </tr>
             <br>
             <tr>
-                <th><input type="button" name="Submit" value="Submit Order"> </th>
-                <th><input type="button" name="lear" value="Clear Form"> </th>
+                <th><input type="button" onclick= "validateTextBox()" name="Submit" value="Submit Order"> </th>
+                <th><input type="button" onclick= "empty()" name="lear" value="Clear Form"> </th>
             </tr>
         </table>
 
 </form>
 
+<script>
+
+    function getSum() {
+        var input = document.getElementsByName("product");
+        var total = 0;
+        for (var i = 0; i < input.length; i++) {
+        if (input[i].checked) {
+            total += input[i].value;
+        }
+        return total;
+    }
+
+    function subTotal() {
+        var total = getSum();
+        parsefloat(total);
+    }
+
+  document.getElementsByName("total")[0].value = "$" + total.toFixed(2);
+    }
+
+    function empty() {
+        document.getElementById("myForm").reset();
+    }
+
+    function validateTextBox() {
+        var box = document.getElementById("name");
+        if (box.value === " ") {
+            alert("Please fill required field");
+            box.focus();
+            box.style.border= "solid 3px red";
+        }
+    }
+
+</script>
+
 </body>
+</HTML>
