@@ -14,11 +14,11 @@
     <form id= "myForm" name="contactme"  action= "message.html"   method="POST" onSubmit="return validateTextBox();">
         <label for= "name"> Name: </label>
         <input type="text" name="name" placeholder= "Name Required">
-        <br>
-        Street Address:<br>
+        <br><br>
+        <label for= "address"> Street Address: </label>
         <input type="address" name="address" style="width: 500px">
-        <br>
-        City, State, Zip: <br>
+        <br><br>
+        <label for= "city"> City, State, Zip: </label>
         <input type="city" name="city" style="width: 500px" >
         <br>
 
@@ -34,27 +34,27 @@
             <tr>
                 <th>Unpopped Popcorn(1 lb.)</th>
                 <th>$3.00</th>
-                <th><input type="input" onclick= "getSum()" name="product" id="unpopped"> </th>
+                <th><input type="input" value= "3.00" name="QTY" id="unpopped"> </th>
             </tr>
             <tr>
                 <th>Caramel Popcorn(2 lb. Canister)</th>
                 <th>$3.50</th>
-                <th><input type="input" onclick= "getSum()" name="product" id="caramel"> </th>
+                <th><input type="input" value= "3.50" name="QTY" id="caramel"> </th>
             </tr>
             <tr>
                 <th>Caramel Nut Popcorn(2 lb. Canister)</th>
                 <th>$4.50</th>
-                <th><input type="input" onclick= "getSum()" name="product" id="nut"> </th>
+                <th><input type="input" value= "4.50" name="QTY" id="nut"> </th>
             </tr>
             <tr>
                 <th>Toffey Nut Popcorn(2 lb. Canister)</th>
                 <th>$5.00</th>
-                <th><input type="input" onclick= "getSum()" name="product" id="toffey"> </th>
+                <th><input type="input" value= "5.00" name="QTY" id="toffey"> </th>
             </tr>
             <tr>
                 <th><strong>Subtotal:</strong></th>
                 <th><input type="total" name= "total"readonly= "readonly" style="width: 30px"></th>
-                <th><input type="button" name="update" id="update_total" onclick= "subTotall()" value="Update Total"> </th>
+                <th><input type="button" name="update" id="update_total" onclick= "multiply()" value="Update Total"> </th>
             </tr>
         </table>
 <br>
@@ -81,22 +81,13 @@
 
 <script>
 
-    function getSum() {
-        var input = document.getElementsByName("product");
-        var total = 0;
-        for (var i = 0; i < input.length; i++) {
-        if (input[i].checked) {
-            total += input[i].value;
+    function multiply() {
+        var a = Number(document.getElementById("QTY").value);
+        
+        var sum = 0
+        for (var i = 0; i < input.length; i++ ) {
+            sum = parsefloat(input[i] * a[i]);
         }
-        return total;
-    }
-
-    function subTotal() {
-        var total = getSum();
-        parsefloat(total);
-    }
-
-  document.getElementsByName("total")[0].value = "$" + total.toFixed(2);
     }
 
     function empty() {
