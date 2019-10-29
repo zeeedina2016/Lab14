@@ -62,10 +62,10 @@
         <br>
         <table cellspacing="15">
             <tr>
-                <th><input type="radio" value="Visa">Visa</th>
-                <th><input type="radio" value="Master Card">Master Card</th>
-                <th><input type="radio" value="Discover">Discover</th>
-                <th><input type="radio" value="American Express">American Express</th>
+                <th><input id= "card" type="radio" onclick= "isCard()" value="Visa">Visa</th>
+                <th><input id= "card2" type="radio" onclick= "isCard()" value="Master Card">Master Card</th>
+                <th><input id= "card3" type="radio" onclick= "isCard()" value="Discover">Discover</th>
+                <th><input id= "card4" type="radio" onclick= "isCard()" value="American Express">American Express</th>
                 <th><input type="radio" value="Check">Check</th>
             </tr>
             <br>
@@ -79,6 +79,7 @@
 
 <script>
 
+    // calculate the subtotal
     function calcPrice() {
         var total = A+B+C+D;
         n = 4
@@ -90,7 +91,6 @@
         for(var i = 0; i <= 4; i++ ) {
             total = A + B + C + D
         }
-
         document.getElementById("stotal").value = total;
     }
 
@@ -106,6 +106,18 @@
             return false;
         }
         return true;
+    }
+
+    // confirmation box if using card
+    function isCard() {
+        var input = document.getElementById("card");
+        if(card.checked || card2.checked || card3.checked || card4.checked) {
+            if(confirm("You are using a credit card. Continue?")) {
+                alert("You pressed continue.");
+            } else {
+                empty();
+            }
+        }
     }
 
 </script>
