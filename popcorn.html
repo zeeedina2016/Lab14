@@ -51,14 +51,14 @@
             </tr>
             <tr>
                 <th><strong>Subtotal:</strong></th>
-                <th><input id="stotal" type="text" readonly= "readonly" style="width: 30px"></th>
+                <th><input id="stotal" type="text" readonly= "readonly" style="width: 100px"></th>
                 <th><input type="button" id="update_total" onclick= "calcPrice()" value="Update Total"> </th>
             </tr>
         </table>
 <br>
         <strong><h1>Payment Method</h1></strong>
         <strong>Grand Total</strong>:
-        <input type="text" name="Gtotal" style="width: 100px">
+        <input type="text"  id="Gtotal"  style="width: 100px">
         <br>
         <table cellspacing="15">
             <tr>
@@ -66,7 +66,7 @@
                 <th><input id= "card2" type="radio" onclick= "isCard()" value="Master Card">Master Card</th>
                 <th><input id= "card3" type="radio" onclick= "isCard()" value="Discover">Discover</th>
                 <th><input id= "card4" type="radio" onclick= "isCard()" value="American Express">American Express</th>
-                <th><input type="radio" value="Check">Check</th>
+                <th><input type="radio" id="check" value="Check">Check</th>
             </tr>
             <br>
             <tr>
@@ -78,7 +78,6 @@
 </form>
 
 <script>
-
     // calculate the subtotal
     function calcPrice() {
         var total = A+B+C+D;
@@ -87,18 +86,24 @@
         var B = 3.50*document.getElementById("op2").value;
         var C = 4.50*document.getElementById("op3").value;
         var D = 5*document.getElementById("op4").value;
-
         for(var i = 0; i <= 4; i++ ) {
             total = A + B + C + D
         }
         document.getElementById("stotal").value = total;
-    }
 
+        var tax = total * 0.07;
+        var percentage = total + tax;
+        p = percentage.toFixed(2);
+        if(total != ""){
+            grandtotal = parseFloat(p); 
+        }
+        document.getElementById("Gtotal").value = grandtotal;
+        
+    }
     // clears the form
     function empty() {
         document.getElementById("myForm").reset();
     }
-
     // alert if name field is empty
     function IsEmpty() {
         if (document.forms["myForm"].name.value === "") {
@@ -107,19 +112,22 @@
         }
         return true;
     }
-
     // confirmation box if using card
+    //This chooses the check option, whenuser doesn't want to use card
     function isCard() {
         var input = document.getElementById("card");
         if(card.checked || card2.checked || card3.checked || card4.checked) {
-            if(confirm("You are using a credit card. Continue?")) {
+            if(confirm("You are using a credit card, and will be charged an extra $2.50. Continue?")) {
                 alert("You pressed continue.");
             } else {
-                empty();
+                document.getElementById("check").checked = true;
+                document.getElementById("card").checked = false;
+                document.getElementById("card2").checked = false;
+                document.getElementById("card3").checked = false;
+                document.getElementById("card4").checked = false;
             }
         }
     }
-
 </script>
 
 </body>
