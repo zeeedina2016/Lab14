@@ -1,60 +1,58 @@
 <!DOCTYPE HTML>
 <HTML LANG="en">
 <head>
-    <meta char-set="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src= "scripts/main.js"></script>
-    
+
     <title>Popcorn Sales</title>
 
 </head>
 <body>
     <h1>Club Popcorn Sales</h1>
-    <form id= "myForm" name="contactme"  action= "message.html"   method="POST" onSubmit="return validateTextBox();">
+    <form id= "myForm"  action= "mailto:sthepsimoung@my.uri.edu" method="GET">
         <label for= "name"> Name: </label>
-        <input type="text" name="name" placeholder= "Name Required">
+        <input type="text" id= "name" name="name" placeholder= "Name Required">
         <br><br>
         <label for= "address"> Street Address: </label>
-        <input type="address" name="address" style="width: 500px">
+        <input type="text" name="address" style="width: 500px">
         <br><br>
         <label for= "city"> City, State, Zip: </label>
-        <input type="city" name="city" style="width: 500px" >
+        <input type="text" name="city" style="width: 500px" >
         <br>
 
-        <table width="500">
+        <table style= "width: 500">
             <tr>
                 <th><h2>Product Name</h2></th>
                 <th><h2>Price</h2></th>
                 <th><h2>Quantity</h2></th>
             </tr>
-            <br>
-            <br>
-            
+            <br><br>
             <tr>
-                <th>Unpopped Popcorn(1 lb.)</th>
+                <th>Unpopped Popcorn (1 lb.)</th>
                 <th>$3.00</th>
-                <th><input type="input" value= "3.00" name="QTY" id="unpopped"> </th>
+                <th><input type="number" id="op1" name="QTY"> </th>
             </tr>
             <tr>
                 <th>Caramel Popcorn(2 lb. Canister)</th>
                 <th>$3.50</th>
-                <th><input type="input" value= "3.50" name="QTY" id="caramel"> </th>
+                <th><input type="number" id="op2" name="QTY"> </th>
             </tr>
             <tr>
                 <th>Caramel Nut Popcorn(2 lb. Canister)</th>
                 <th>$4.50</th>
-                <th><input type="input" value= "4.50" name="QTY" id="nut"> </th>
+                <th><input type="number" id="op3" name="QTY"> </th>
             </tr>
             <tr>
                 <th>Toffey Nut Popcorn(2 lb. Canister)</th>
                 <th>$5.00</th>
-                <th><input type="input" value= "5.00" name="QTY" id="toffey"> </th>
+                <th><input type="number" id="op4" name="QTY"> </th>
             </tr>
             <tr>
                 <th><strong>Subtotal:</strong></th>
-                <th><input type="total" name= "total"readonly= "readonly" style="width: 30px"></th>
-                <th><input type="button" name="update" id="update_total" onclick= "multiply()" value="Update Total"> </th>
+                <th><input id="stotal" type="text" readonly= "readonly" style="width: 30px"></th>
+                <th><input type="button" id="update_total" onclick= "calcPrice()" value="Update Total"> </th>
             </tr>
         </table>
 <br>
@@ -72,7 +70,7 @@
             </tr>
             <br>
             <tr>
-                <th><input type="button" onclick= "validateTextBox()" name="Submit" value="Submit Order"> </th>
+                <th><input type="button" onclick= "IsEmpty()" name="Submit" value="Submit Order"> </th>
                 <th><input type="button" onclick= "empty()" name="lear" value="Clear Form"> </th>
             </tr>
         </table>
@@ -81,26 +79,33 @@
 
 <script>
 
-    function multiply() {
-        var a = Number(document.getElementById("QTY").value);
-        
-        var sum = 0
-        for (var i = 0; i < input.length; i++ ) {
-            sum = parsefloat(input[i] * a[i]);
+    function calcPrice() {
+        var total = A+B+C+D;
+        n = 4
+        var A = 3*document.getElementById("op1").value;
+        var B = 3.50*document.getElementById("op2").value;
+        var C = 4.50*document.getElementById("op3").value;
+        var D = 5*document.getElementById("op4").value;
+
+        for(var i = 0; i <= 4; i++ ) {
+            total = A + B + C + D
         }
+
+        document.getElementById("stotal").value = total;
     }
 
+    // clears the form
     function empty() {
         document.getElementById("myForm").reset();
     }
 
-    function validateTextBox() {
-        var box = document.getElementById("name");
-        if (box.value === " ") {
-            alert("Please fill required field");
-            box.focus();
-            box.style.border= "solid 3px red";
+    // alert if name field is empty
+    function IsEmpty() {
+        if (document.forms["myForm"].name.value === "") {
+            alert("Please Fill In Required Field");
+            return false;
         }
+        return true;
     }
 
 </script>
