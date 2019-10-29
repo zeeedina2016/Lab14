@@ -119,6 +119,9 @@
         if(card.checked || card2.checked || card3.checked || card4.checked) {
             if(confirm("You are using a credit card, and will be charged an extra $2.50. Continue?")) {
                 alert("You pressed continue.");
+                
+                // increases grand total after selecting card
+                document.getElementById("Gtotal").value= grandtotal+2.50;
             } else {
                 document.getElementById("check").checked = true;
                 document.getElementById("card").checked = false;
